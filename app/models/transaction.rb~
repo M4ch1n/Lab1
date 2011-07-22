@@ -1,0 +1,13 @@
+class Transaction < ActiveRecord::Base
+  belongs_to :profile
+  
+  validates :profile_id, :presence => true
+  validates :amount, :presence => true,:numericality => true
+  validate  :profile_exista, :message => "Estas mal maestro"
+  
+  def profile_exista
+    errors.add(:profile_id, "Selecciona un perfil") if profile_id == -1
+  end
+  
+  
+end
